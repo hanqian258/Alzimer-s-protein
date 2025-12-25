@@ -1,6 +1,9 @@
 import os
 import subprocess
 import shutil
+import platform
+import requests
+import stat
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from meeko import MoleculePreparation
@@ -37,10 +40,53 @@ def prep_ligand(smiles, name="ligand"):
         print(f"Error preparing ligand {name}: {e}")
         return None
 
+def download_vina():
+    """
+    Downloads the AutoDock Vina executable for the current OS.
+    """
+    system = platform.system()
+    machine = platform.machine()
+
+    base_url = "https://github.com/ccsb-scripps/AutoDock-Vina/releases/download/v1.2.5"
+    filename = "vina"
+    url = ""
+
+    print(f"Detected system: {system} {machine}")
+
+    if system == "Linux":
+        url = f"{base_url}/vina_1.2.5_linux_x86_64"
+    elif system == "Darwin":
+        url = f"{base_url}/vina_1.2.5_mac_x86_64"
+    elif system == "Windows":
+        url = f"{base_url}/vina_1.2.5_win.exe"
+        filename = "vina.exe"
+    else:
+        print(f"Unsupported system: {system}")
+        return None
+
+    print(f"Downloading Vina from {url}...")
+    try:
+        response = requests.get(url, stream=True)
+        response.raise_for_status()
+        with open(filename, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+
+        if system != "Windows":
+            st_mode = os.stat(filename)
+            os.chmod(filename, st_mode.st_mode | stat.S_IEXEC)
+
+        print("Vina downloaded successfully.")
+        return os.path.abspath(filename)
+    except Exception as e:
+        print(f"Failed to download Vina: {e}")
+        return None
+
 def get_vina_path():
     """
     Attempts to locate the AutoDock Vina executable.
     Prioritizes system PATH, then checks local directory.
+    If not found, attempts to download it.
     """
     # Check system PATH
     system_vina = shutil.which("vina")
@@ -49,12 +95,13 @@ def get_vina_path():
 
     # Check local directory (legacy/linux support)
     # Also check for common names people might give it after download
-    for potential_name in ["vina", "vina_mac", "vina_linux", "vina_1.2.5_mac_x86_64"]:
+    for potential_name in ["vina", "vina_mac", "vina_linux", "vina_1.2.5_mac_x86_64", "vina.exe"]:
         local_vina = os.path.abspath(potential_name)
         if os.path.exists(local_vina) and os.access(local_vina, os.X_OK):
             return local_vina
 
-    return None
+    # Try downloading if not found
+    return download_vina()
 
 def run_docking(ligand_pdbqt, receptor_path, center, size=(20, 20, 20)):
     """
@@ -66,9 +113,7 @@ def run_docking(ligand_pdbqt, receptor_path, center, size=(20, 20, 20)):
     vina_path = get_vina_path()
 
     if not vina_path:
-        print("Error: AutoDock Vina executable not found.")
-        print("Please download the Vina executable for your OS and place it in this folder named 'vina'.")
-        print("Download link: https://github.com/ccsb-scripps/AutoDock-Vina/releases")
+        print("Error: AutoDock Vina executable not found and download failed.")
         return None, None
 
     # Write ligand to temp file
