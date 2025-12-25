@@ -20,6 +20,11 @@ def prep_ligand(smiles, name="ligand"):
         # Add Hydrogens
         mol = Chem.AddHs(mol)
 
+        # Handle fragments/salts (keep largest)
+        frags = Chem.GetMolFrags(mol, asMols=True, sanitizeFrags=False)
+        if len(frags) > 1:
+            mol = max(frags, key=lambda m: m.GetNumAtoms())
+
         # Generate 3D Conformer
         params = AllChem.ETKDGv3()
         params.useSmallRingTorsions = True
