@@ -184,12 +184,21 @@ with tabs[3]:
 
         st.success("Evolution Complete!")
 
-        col1, col2, col3 = st.columns(3)
+        initial_score = history[0]['best_score'] if history else 0
+        initial_pose = history[0]['best_pose'] if history and 'best_pose' in history[0] else None
+
+        improvement_pct = 0.0
+        if initial_score != 0:
+            improvement_pct = ((best_score - initial_score) / initial_score) * 100
+
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric("Original Score", f"{history[0]['best_score'] if history else 0} kcal/mol") # Approx
+            st.metric("Original Score", f"{initial_score} kcal/mol")
         with col2:
             st.metric("Optimized Score", f"{best_score} kcal/mol")
         with col3:
+             st.metric("Improvement", f"{improvement_pct:.2f}%")
+        with col4:
              kd_val = scoring.calculate_kd(best_score)
              st.metric("Optimized Kd", f"{kd_val:.4f} uM")
 
@@ -200,16 +209,38 @@ with tabs[3]:
         st.subheader("Optimized Structure")
         st.code(best_smi)
 
-        # Visualize Optimized
-        view = py3Dmol.view(width=800, height=600)
+        # Visual Comparison
+        st.subheader("Visual Comparison")
+        col_v1, col_v2 = st.columns(2)
+
         with open("data/5O3L.pdb") as f:
             pdb_content = f.read()
-        view.addModel(pdb_content, "pdb")
-        view.setStyle({'model': -1}, {"cartoon": {'color': 'spectrum'}})
-        view.addModel(best_pose, "pdbqt")
-        view.setStyle({'model': -1}, {"stick": {'colorscheme': 'cyanCarbon'}})
-        view.zoomTo()
-        showmol(view, height=600, width=800)
+
+        with col_v1:
+            st.markdown("### Original Molecule")
+            if initial_pose:
+                view1 = py3Dmol.view(width=400, height=400)
+                view1.addModel(pdb_content, "pdb")
+                view1.setStyle({'model': -1}, {"cartoon": {'color': 'spectrum'}})
+                view1.addModel(initial_pose, "pdbqt")
+                view1.setStyle({'model': -1}, {"stick": {'colorscheme': 'grayCarbon'}})
+                view1.zoomTo()
+                showmol(view1, height=400, width=400)
+            else:
+                st.write("No pose available for original molecule.")
+
+        with col_v2:
+            st.markdown("### Optimized Molecule")
+            if best_pose:
+                view2 = py3Dmol.view(width=400, height=400)
+                view2.addModel(pdb_content, "pdb")
+                view2.setStyle({'model': -1}, {"cartoon": {'color': 'spectrum'}})
+                view2.addModel(best_pose, "pdbqt")
+                view2.setStyle({'model': -1}, {"stick": {'colorscheme': 'cyanCarbon'}})
+                view2.zoomTo()
+                showmol(view2, height=400, width=400)
+            else:
+                st.write("No pose available for optimized molecule.")
 
 st.markdown("---")
 st.caption("Developed for Science Fair Project | Sources: PDB, PubChem, PubMed.")

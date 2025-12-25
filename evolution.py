@@ -74,6 +74,8 @@ def evolve_ligand(initial_smiles, receptor_pdbqt, center, generations=5, populat
     best_overall_smiles = initial_smiles
     best_overall_pdbqt = None
 
+    history = []
+
     # Initialize Score
     print("Evaluating initial structure...")
     pdbqt = docking.prep_ligand(initial_smiles, "Initial")
@@ -83,10 +85,14 @@ def evolve_ligand(initial_smiles, receptor_pdbqt, center, generations=5, populat
             best_overall_score = score
             best_overall_pdbqt = docked_pose
             print(f"Initial Score: {score}")
+            history.append({
+                "generation": 0,
+                "best_score": best_overall_score,
+                "best_smiles": initial_smiles,
+                "best_pose": best_overall_pdbqt
+            })
         else:
             best_overall_score = 0 # Failed
-
-    history = []
 
     for gen in range(generations):
         print(f"--- Generation {gen+1} ---")
@@ -126,7 +132,8 @@ def evolve_ligand(initial_smiles, receptor_pdbqt, center, generations=5, populat
             history.append({
                 "generation": gen + 1,
                 "best_score": best_gen_score,
-                "best_smiles": results[0][1]
+                "best_smiles": results[0][1],
+                "best_pose": results[0][2]
             })
         else:
             print("No valid offspring in this generation.")
