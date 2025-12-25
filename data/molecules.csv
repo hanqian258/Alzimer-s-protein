@@ -1,0 +1,12 @@
+name,category,smiles,citation
+Donepezil,FDA Drug,COG1=CC=C(C=C1)CC2C3=CC=CC=C3CC2C(=O)NCC4=CC=CC=C4,https://pubchem.ncbi.nlm.nih.gov/compound/Donepezil
+Galantamine,FDA Drug,CN1CCC23C=CC(CC2OC4=C(C=CC(=C34)C1)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Galantamine
+Memantine,FDA Drug,CC12CC3CC(C1)(CC(C3)(C2)N)C,https://pubchem.ncbi.nlm.nih.gov/compound/Memantine
+Rivastigmine,FDA Drug,CCN(C)C(=O)OC1=CC=CC=C1C(C)N(C)C,https://pubchem.ncbi.nlm.nih.gov/compound/Rivastigmine
+Curcumin,Flavonoid,COC1=C(C=CC(=C1)C=CC(=O)CC(=O)C=CC2=CC(=C(C=C2)O)OC)O,https://pubmed.ncbi.nlm.nih.gov/15590663/
+Quercetin,Flavonoid,C1=CC(=C(C=C1C2=C(C(=O)C3=C(C=C(C=C3O2)O)O)O)O)O,https://pubmed.ncbi.nlm.nih.gov/22008271/
+Resveratrol,Flavonoid,C1=CC(=CC=C1C=CC2=CC(=C(C=C2)O)O)O,https://pubmed.ncbi.nlm.nih.gov/19462799/
+EGCG,Flavonoid,C1C(C(OC2=CC(=CC(=C21)O)O)C3=CC(=C(C(=C3)O)O)O)OC(=O)C4=CC(=C(C(=C4)O)O)O,https://pubmed.ncbi.nlm.nih.gov/16042306/
+Congo Red,Known Ligand,C1=CC=C(C=C1)NC2=CC(=C(C=C2)S(=O)(=O)O)N=NC3=CC4=C(C=C3)C(=C(C=C4)S(=O)(=O)O)N,https://pubmed.ncbi.nlm.nih.gov/9831998/
+Thioflavin T,Known Ligand,CN1C2=CC(=C(C=C2SC1=CC3=CC=C(C=C3)N(C)C)C)C,https://pubmed.ncbi.nlm.nih.gov/21855611/
+Chrysamine G,Known Ligand,C1=CC(=C(C=C1)C(=O)O)C(=O)O,https://pubmed.ncbi.nlm.nih.gov/10701552/
