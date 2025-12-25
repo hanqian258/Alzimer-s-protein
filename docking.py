@@ -48,9 +48,11 @@ def get_vina_path():
         return system_vina
 
     # Check local directory (legacy/linux support)
-    local_vina = os.path.abspath("vina")
-    if os.path.exists(local_vina) and os.access(local_vina, os.X_OK):
-        return local_vina
+    # Also check for common names people might give it after download
+    for potential_name in ["vina", "vina_mac", "vina_linux", "vina_1.2.5_mac_x86_64"]:
+        local_vina = os.path.abspath(potential_name)
+        if os.path.exists(local_vina) and os.access(local_vina, os.X_OK):
+            return local_vina
 
     return None
 
@@ -64,9 +66,9 @@ def run_docking(ligand_pdbqt, receptor_path, center, size=(20, 20, 20)):
     vina_path = get_vina_path()
 
     if not vina_path:
-        print("Error: AutoDock Vina executable not found. Please install 'vina'.")
-        print("  MacOS: brew install vina")
-        print("  Linux: sudo apt-get install autodock-vina")
+        print("Error: AutoDock Vina executable not found.")
+        print("Please download the Vina executable for your OS and place it in this folder named 'vina'.")
+        print("Download link: https://github.com/ccsb-scripps/AutoDock-Vina/releases")
         return None, None
 
     # Write ligand to temp file

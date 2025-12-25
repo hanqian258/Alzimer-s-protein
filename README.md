@@ -31,25 +31,21 @@ We implemented a Genetic Algorithm (Evolutionary "Back Propagation") to optimize
 *   Python 3.8+
 
 ### 1. Install AutoDock Vina
-You must install the `vina` executable separately for your operating system.
+Since `pip install vina` can be difficult on MacOS, we recommend downloading the executable directly.
 
-**MacOS (Homebrew):**
-```bash
-brew install vina
-```
-**Linux (Debian/Ubuntu):**
-```bash
-sudo apt-get install autodock-vina
-```
-**Windows:**
-Download from [vina.scripps.edu](https://vina.scripps.edu/downloads/) and add it to your PATH.
+1.  **Download Vina**: Go to the [AutoDock Vina Releases Page](https://github.com/ccsb-scripps/AutoDock-Vina/releases).
+2.  **Select Version**: Download the version for your OS (e.g., `vina_1.2.5_mac_x86_64` for Intel Mac, or look for an arm64 version if available, though x86_64 works on M1/M2/M3 via Rosetta).
+3.  **Place in Folder**:
+    *   Rename the downloaded file to just `vina` (or `vina_mac`).
+    *   Move this file into the root folder of this project (where `app.py` is).
+    *   **Permission (Mac)**: You might need to run `chmod +x vina` in the terminal to make it executable. If MacOS blocks it, right-click and "Open" to allow it once.
 
 ### 2. Install Python Dependencies
 ```bash
 pip install streamlit rdkit meeko py3Dmol stmol pandas numpy scipy
 ```
 
-> **Note**: During installation of `meeko`, you might see a `SyntaxError` related to `compute_water_map.py` (e.g., `Missing parentheses in call to 'print'`). This is due to a legacy file included in the package and **can be safely ignored**. The core library will still install and function correctly.
+> **Note**: During installation of `meeko`, you might see a `SyntaxError` related to `compute_water_map.py`. This is due to a legacy file included in the package and **can be safely ignored**.
 
 ### 3. Run the Simulation
 ```bash
