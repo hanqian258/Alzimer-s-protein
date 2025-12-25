@@ -1,0 +1,7 @@
+name,category,smiles,citation
+Methylene Blue,FDA Drug,CN(C)C1=CC2=C(C=C1)N=C3C=CC(=[N+](C)C)C=C3S2.[Cl-],https://pubmed.ncbi.nlm.nih.gov/22022713/
+Epothilone D,FDA Drug,CC1CCCC2=C(C(CC(OC(=O)CC(C(C(C(C1)O)C)(C)C)O)C(C(=C2C)C=CS(C)=O)C)C)C,https://pubmed.ncbi.nlm.nih.gov/22008271/
+EGCG,Flavonoid,C1C(C(OC2=CC(=CC(=C21)O)O)C3=CC(=C(C(=C3)O)O)O)OC(=O)C4=CC(=C(C(=C4)O)O)O,https://pubmed.ncbi.nlm.nih.gov/16042306/
+Curcumin,Flavonoid,COC1=C(C=CC(=C1)C=CC(=O)CC(=O)C=CC2=CC(=C(C=C2)O)OC)O,https://pubmed.ncbi.nlm.nih.gov/15590663/
+PBB3,Known Ligand,C1=CN=C(C=C1)C=CC=CC2=CC3=C(C=C2)N(C(=S)N3)C,https://pubmed.ncbi.nlm.nih.gov/24056294/
+T807 (AV-1451),Known Ligand,CN1C2=C(C=N1)C=C(C=C2)C3=CC4=C(C=C3)N=C(N4)C5=CC=CN=C5,https://pubmed.ncbi.nlm.nih.gov/24056294/
