@@ -53,7 +53,15 @@ Run these commands one by one to ensure everything installs correctly:
     ```
 
 > **Troubleshooting**:
-> *   If you see "No module named 'ipython_genutils'", simply run: `pip install ipython_genutils`
+> *   If you see "No module named 'ipython_genutils'", simply run:
+>     ```bash
+>     pip install ipython_genutils
+>     ```
+> *   If `meeko` fails or you need `gemmi`, ensure your virtual environment is active and install it manually:
+>     ```bash
+>     source .venv/bin/activate
+>     pip install gemmi
+>     ```
 > *   If you see a `SyntaxError` about `compute_water_map.py` during `meeko` install, **ignore it**. It is a harmless warning.
 
 ### 3. Run the Simulation
