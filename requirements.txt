@@ -1,0 +1,9 @@
+streamlit
+pandas
+rdkit
+meeko
+py3Dmol
+stmol
+scipy
+requests
+plotly
