@@ -31,8 +31,9 @@ We implemented a Genetic Algorithm (Evolutionary "Back Propagation") to optimize
 *   Python 3.8+
 
 ### 1. Install AutoDock Vina
-Since `pip install vina` can be difficult on MacOS, we recommend downloading the executable directly.
+The application now attempts to **automatically download** the correct Vina executable if it is missing.
 
+However, if the auto-download fails, you can install it manually:
 1.  **Download Vina**: Go to the [AutoDock Vina Releases Page](https://github.com/ccsb-scripps/AutoDock-Vina/releases).
 2.  **Select Version**: Download the version for your OS (e.g., `vina_1.2.5_mac_x86_64` for Intel Mac, or look for an arm64 version if available, though x86_64 works on M1/M2/M3 via Rosetta).
 3.  **Place in Folder**:
@@ -42,7 +43,7 @@ Since `pip install vina` can be difficult on MacOS, we recommend downloading the
 
 ### 2. Install Python Dependencies
 ```bash
-pip install streamlit rdkit meeko py3Dmol stmol pandas numpy scipy
+pip install streamlit rdkit meeko py3Dmol stmol pandas numpy scipy requests gemmi ipython_genutils ipywidgets
 ```
 
 > **Note**: During installation of `meeko`, you might see a `SyntaxError` related to `compute_water_map.py`. This is due to a legacy file included in the package and **can be safely ignored**.
