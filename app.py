@@ -7,7 +7,7 @@ import docking
 import evolution
 import time
 
-st.set_page_config(page_title="Alzheimer's Protein Docking Sim", layout="wide")
+st.set_page_config(page_title="Tau Protein Docking Sim", layout="wide")
 
 # Load Config
 @st.cache_resource
@@ -21,10 +21,10 @@ def load_config():
 CENTER = load_config()
 RECEPTOR_PATH = "data/receptor.pdbqt"
 
-st.title("In Silico Screening of Ligands for Alzheimer's Amyloid-Beta")
+st.title("In Silico Screening of Ligands for Tau Protein Aggregation")
 st.markdown("""
-**Research Aim:** This simulation compares the binding affinity of various ligands to the Amyloid Beta (Aβ-42) protein (PDB: 1IYT), specifically targeting the 'KLVFF' aggregation site.
-We analyze three groups of molecules: **FDA Approved Drugs**, **Flavonoids**, and **Known Ligands**.
+**Research Aim:** This simulation compares the binding affinity of various ligands to the **Tau Protein Fibril** (PDB: 5O3L), specifically targeting the **VQIVYK (PHF6)** aggregation motif.
+We analyze three groups of molecules: **FDA Approved Drugs** (Repurposed), **Flavonoids**, and **Known Ligands** (PET Tracers/Inhibitors).
 Additionally, we employ an **Evolutionary Algorithm** to virtually evolve and optimize ligand structures for better binding.
 """)
 
@@ -39,11 +39,11 @@ df = load_data()
 
 with tabs[0]:
     st.header("Molecule Library")
-    st.markdown("The following molecules have been selected based on literature reviews.")
+    st.markdown("The following molecules have been selected based on literature reviews for their potential to bind Tau aggregates.")
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.subheader("FDA Drugs")
+        st.subheader("FDA/Clinical Drugs")
         st.dataframe(df[df['category'] == 'FDA Drug'][['name', 'citation']])
     with col2:
         st.subheader("Flavonoids")
@@ -56,6 +56,7 @@ with tabs[0]:
 
 with tabs[1]:
     st.header("High-Throughput Docking Simulation")
+    st.markdown(f"**Target:** Tau Fibril (5O3L) | **Grid Center:** {CENTER}")
 
     if st.button("Run Docking Simulation"):
         st.write("Initializing AutoDock Vina...")
@@ -97,11 +98,11 @@ with tabs[1]:
         st.subheader("Comparative Binding Affinity")
         st.bar_chart(res, x="Name", y="Binding Score (kcal/mol)", color="Category")
 
-        st.write("**Note:** Lower (more negative) scores indicate stronger binding.")
+        st.write("**Note:** Lower (more negative) scores indicate stronger binding to the Tau fibril.")
 
 with tabs[2]:
     st.header("3D Visualization")
-    st.markdown("Visualize the molecular interactions. Select a molecule to see its docked pose with Aβ-42.")
+    st.markdown("Visualize the molecular interactions. Select a molecule to see its docked pose with the Tau Fibril.")
 
     # Needs docking to be run first for specific poses, or we re-run on demand for visualization
     selected_mol_name = st.selectbox("Select Molecule", df['name'].unique())
@@ -121,7 +122,7 @@ with tabs[2]:
 
             # Load Receptor (cleaned PDB or PDBQT)
             # We display the original PDB for better visuals (cartoon)
-            with open("data/1IYT.pdb") as f:
+            with open("data/5O3L.pdb") as f:
                 pdb_content = f.read()
             view.addModel(pdb_content, "pdb")
             view.setStyle({'model': -1}, {"cartoon": {'color': 'spectrum'}})
@@ -138,7 +139,7 @@ with tabs[2]:
 with tabs[3]:
     st.header("AI-Driven Optimization (Evolutionary Algorithm)")
     st.markdown("""
-    This module uses a Genetic Algorithm to "evolve" a molecule structure to maximize its binding affinity.
+    This module uses a Genetic Algorithm to "evolve" a molecule structure to maximize its binding affinity to the **Tau VQIVYK motif**.
     It starts with a parent molecule, applies random mutations (Back Propagation concept), and selects the best binder.
     """)
 
@@ -177,7 +178,7 @@ with tabs[3]:
 
         # Visualize Optimized
         view = py3Dmol.view(width=800, height=600)
-        with open("data/1IYT.pdb") as f:
+        with open("data/5O3L.pdb") as f:
             pdb_content = f.read()
         view.addModel(pdb_content, "pdb")
         view.setStyle({'model': -1}, {"cartoon": {'color': 'spectrum'}})
