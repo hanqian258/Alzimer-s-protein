@@ -29,14 +29,29 @@ We implemented a Genetic Algorithm (Evolutionary "Back Propagation") to optimize
 
 ### Prerequisites
 *   Python 3.8+
-*   AutoDock Vina (Binary included or installed in path)
 
-### Install Dependencies
+### 1. Install AutoDock Vina
+You must install the `vina` executable separately for your operating system.
+
+**MacOS (Homebrew):**
+```bash
+brew install vina
+```
+**Linux (Debian/Ubuntu):**
+```bash
+sudo apt-get install autodock-vina
+```
+**Windows:**
+Download from [vina.scripps.edu](https://vina.scripps.edu/downloads/) and add it to your PATH.
+
+### 2. Install Python Dependencies
 ```bash
 pip install streamlit rdkit meeko py3Dmol stmol pandas numpy scipy
 ```
 
-### Run the Simulation
+> **Note**: During installation of `meeko`, you might see a `SyntaxError` related to `compute_water_map.py` (e.g., `Missing parentheses in call to 'print'`). This is due to a legacy file included in the package and **can be safely ignored**. The core library will still install and function correctly.
+
+### 3. Run the Simulation
 ```bash
 streamlit run app.py
 ```

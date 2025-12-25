@@ -1,9 +1,9 @@
 import os
 import subprocess
+import shutil
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from meeko import MoleculePreparation
-from meeko import PDBQTMolecule
 
 def prep_ligand(smiles, name="ligand"):
     """
@@ -31,14 +31,28 @@ def prep_ligand(smiles, name="ligand"):
         # Convert to PDBQT using Meeko
         preparator = MoleculePreparation()
         preparator.prepare(mol)
-        # In version 0.5+, prepare returns setups but we can also use write_pdbqt_string on the preparator
-        # or PDBQTWriterLegacy if needed.
-        # But let's try the simplest:
         pdbqt_string = preparator.write_pdbqt_string()
         return pdbqt_string
     except Exception as e:
         print(f"Error preparing ligand {name}: {e}")
         return None
+
+def get_vina_path():
+    """
+    Attempts to locate the AutoDock Vina executable.
+    Prioritizes system PATH, then checks local directory.
+    """
+    # Check system PATH
+    system_vina = shutil.which("vina")
+    if system_vina:
+        return system_vina
+
+    # Check local directory (legacy/linux support)
+    local_vina = os.path.abspath("vina")
+    if os.path.exists(local_vina) and os.access(local_vina, os.X_OK):
+        return local_vina
+
+    return None
 
 def run_docking(ligand_pdbqt, receptor_path, center, size=(20, 20, 20)):
     """
@@ -46,18 +60,21 @@ def run_docking(ligand_pdbqt, receptor_path, center, size=(20, 20, 20)):
     """
     import tempfile
 
+    # Determine path to vina binary
+    vina_path = get_vina_path()
+
+    if not vina_path:
+        print("Error: AutoDock Vina executable not found. Please install 'vina'.")
+        print("  MacOS: brew install vina")
+        print("  Linux: sudo apt-get install autodock-vina")
+        return None, None
+
     # Write ligand to temp file
     with tempfile.NamedTemporaryFile(mode='w', suffix='.pdbqt', delete=False) as tmp_lig:
         tmp_lig.write(ligand_pdbqt)
         tmp_lig_path = tmp_lig.name
 
     out_pdbqt_path = tmp_lig_path.replace(".pdbqt", "_out.pdbqt")
-
-    # Construct Vina command
-    # ./vina --receptor data/receptor.pdbqt --ligand tmp.pdbqt --center_x ... --center_y ... --center_z ... --size_x ... --cpu 1
-
-    # Determine path to vina binary. Assuming it's in the current directory or specified.
-    vina_path = os.path.abspath("vina")
 
     cmd = [
         vina_path,
@@ -80,6 +97,7 @@ def run_docking(ligand_pdbqt, receptor_path, center, size=(20, 20, 20)):
 
         # Parse output for score
         best_affinity = 0.0
+        docked_pdbqt = None
 
         if os.path.exists(out_pdbqt_path):
             with open(out_pdbqt_path, 'r') as f:
@@ -92,26 +110,26 @@ def run_docking(ligand_pdbqt, receptor_path, center, size=(20, 20, 20)):
                             best_affinity = float(parts[3])
                             break
 
-            # Read the docked poses
             docked_pdbqt = content
-
-            # Clean up
-            os.remove(tmp_lig_path)
             os.remove(out_pdbqt_path)
-
-            return best_affinity, docked_pdbqt
-
         else:
             print("Vina output file not found.")
-            return None, None
+
+        # Clean up input temp file
+        if os.path.exists(tmp_lig_path):
+            os.remove(tmp_lig_path)
+
+        return best_affinity, docked_pdbqt
 
     except subprocess.CalledProcessError as e:
         print(f"Vina failed: {e}")
+        # Clean up
+        if os.path.exists(tmp_lig_path): os.remove(tmp_lig_path)
         return None, None
     except Exception as e:
         print(f"Docking error: {e}")
+        if os.path.exists(tmp_lig_path): os.remove(tmp_lig_path)
         return None, None
 
 if __name__ == "__main__":
-    # Test block
     pass
