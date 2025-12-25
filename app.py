@@ -112,7 +112,13 @@ with tabs[2]:
     st.markdown("Visualize the molecular interactions. Select a molecule to see its docked pose with the Tau Fibril.")
 
     # Needs docking to be run first for specific poses, or we re-run on demand for visualization
-    selected_mol_name = st.selectbox("Select Molecule", df['name'].unique())
+    col_sel1, col_sel2, col_sel3 = st.columns(3)
+    with col_sel1:
+        selected_mol_name = st.selectbox("Select Molecule", df['name'].unique())
+    with col_sel2:
+        receptor_style = st.selectbox("Receptor Style", ["Cartoon", "Stick", "Line", "Sphere"], index=0)
+    with col_sel3:
+        ligand_style = st.selectbox("Ligand Style", ["Stick", "Line", "Sphere"], index=0)
 
     if st.button("Visualize Interaction"):
         row = df[df['name'] == selected_mol_name].iloc[0]
@@ -146,11 +152,26 @@ with tabs[2]:
             with open("data/5O3L.pdb") as f:
                 pdb_content = f.read()
             view.addModel(pdb_content, "pdb")
-            view.setStyle({'model': -1}, {"cartoon": {'color': 'spectrum'}})
+
+            # Apply Receptor Style
+            rec_style_map = {
+                "Cartoon": {"cartoon": {'color': 'spectrum'}},
+                "Stick": {"stick": {}},
+                "Line": {"line": {}},
+                "Sphere": {"sphere": {}}
+            }
+            view.setStyle({'model': -1}, rec_style_map.get(receptor_style, {"cartoon": {'color': 'spectrum'}}))
 
             # Add Ligand
             view.addModel(docked_pose, "pdbqt")
-            view.setStyle({'model': -1}, {"stick": {'colorscheme': 'greenCarbon'}})
+
+            # Apply Ligand Style
+            lig_style_map = {
+                "Stick": {"stick": {'colorscheme': 'greenCarbon'}},
+                "Line": {"line": {'colorscheme': 'greenCarbon'}},
+                "Sphere": {"sphere": {'colorscheme': 'greenCarbon'}}
+            }
+            view.setStyle({'model': -1}, lig_style_map.get(ligand_style, {"stick": {'colorscheme': 'greenCarbon'}}))
 
             view.zoomTo()
             showmol(view, height=600, width=800)
