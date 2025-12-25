@@ -5,6 +5,7 @@ import py3Dmol
 from stmol import showmol
 import docking
 import evolution
+import scoring
 import time
 
 st.set_page_config(page_title="Tau Protein Docking Sim", layout="wide")
@@ -74,10 +75,16 @@ with tabs[1]:
             if pdbqt:
                 score, _ = docking.run_docking(pdbqt, RECEPTOR_PATH, CENTER)
 
+            # Calculate Metrics
+            kd_val = scoring.calculate_kd(score) if score else 0
+            affinity_str = scoring.interpret_affinity(score) if score else "N/A"
+
             results.append({
                 "Name": row['name'],
                 "Category": row['category'],
-                "Binding Score (kcal/mol)": score if score else 0
+                "Binding Score (kcal/mol)": score if score else 0,
+                "Kd (uM)": f"{kd_val:.4f}" if score else "N/A",
+                "Affinity Level": affinity_str
             })
 
             progress_bar.progress((i + 1) / total)
@@ -112,10 +119,24 @@ with tabs[2]:
 
         with st.spinner("Calculating pose..."):
             pdbqt = docking.prep_ligand(row['smiles'], row['name'])
-            score, docked_pose = docking.run_docking(pdbqt, RECEPTOR_PATH, CENTER)
+            score = None
+            docked_pose = None
+            if pdbqt:
+                score, docked_pose = docking.run_docking(pdbqt, RECEPTOR_PATH, CENTER)
+            else:
+                st.error(f"Failed to prepare ligand {row['name']}.")
 
         if docked_pose:
-            st.metric("Binding Score", f"{score} kcal/mol")
+            col_res1, col_res2, col_res3 = st.columns(3)
+            with col_res1:
+                st.metric("Binding Score", f"{score} kcal/mol")
+            with col_res2:
+                kd_val = scoring.calculate_kd(score)
+                st.metric("Dissociation Constant (Kd)", f"{kd_val:.2f} uM")
+            with col_res3:
+                interp = scoring.interpret_affinity(score)
+                color = scoring.get_score_color(score)
+                st.markdown(f"### Affinity: <span style='color:{color}'>{interp}</span>", unsafe_allow_html=True)
 
             # View
             view = py3Dmol.view(width=800, height=600)
@@ -163,11 +184,14 @@ with tabs[3]:
 
         st.success("Evolution Complete!")
 
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns(3)
         with col1:
             st.metric("Original Score", f"{history[0]['best_score'] if history else 0} kcal/mol") # Approx
         with col2:
             st.metric("Optimized Score", f"{best_score} kcal/mol")
+        with col3:
+             kd_val = scoring.calculate_kd(best_score)
+             st.metric("Optimized Kd", f"{kd_val:.4f} uM")
 
         st.subheader("Optimization Trajectory")
         hist_df = pd.DataFrame(history)
