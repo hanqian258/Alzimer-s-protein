@@ -3,6 +3,7 @@ import pandas as pd
 import os
 import py3Dmol
 from stmol import showmol
+import plotly.express as px
 import docking
 import evolution
 import scoring
@@ -45,13 +46,37 @@ with tabs[0]:
     col1, col2, col3 = st.columns(3)
     with col1:
         st.subheader("FDA/Clinical Drugs")
-        st.dataframe(df[df['category'] == 'FDA Drug'][['name', 'citation']])
+        df_fda = df[df['category'] == 'FDA Drug'][['name', 'citation']]
+        st.dataframe(df_fda)
+        st.download_button(
+            label="Download CSV",
+            data=df_fda.to_csv(index=False).encode('utf-8'),
+            file_name='fda_drugs.csv',
+            mime='text/csv',
+            key='download-fda'
+        )
     with col2:
         st.subheader("Flavonoids")
-        st.dataframe(df[df['category'] == 'Flavonoid'][['name', 'citation']])
+        df_flav = df[df['category'] == 'Flavonoid'][['name', 'citation']]
+        st.dataframe(df_flav)
+        st.download_button(
+            label="Download CSV",
+            data=df_flav.to_csv(index=False).encode('utf-8'),
+            file_name='flavonoids.csv',
+            mime='text/csv',
+            key='download-flav'
+        )
     with col3:
         st.subheader("Known Ligands")
-        st.dataframe(df[df['category'] == 'Known Ligand'][['name', 'citation']])
+        df_known = df[df['category'] == 'Known Ligand'][['name', 'citation']]
+        st.dataframe(df_known)
+        st.download_button(
+            label="Download CSV",
+            data=df_known.to_csv(index=False).encode('utf-8'),
+            file_name='known_ligands.csv',
+            mime='text/csv',
+            key='download-known'
+        )
 
     st.info("Navigate to the **Docking Simulation** tab to run the binding affinity calculations.")
 
@@ -101,9 +126,23 @@ with tabs[1]:
 
         st.subheader("Results Analysis")
         st.dataframe(res.sort_values("Binding Score (kcal/mol)"))
+        st.download_button(
+            label="Download Results CSV",
+            data=res.to_csv(index=False).encode('utf-8'),
+            file_name='docking_results.csv',
+            mime='text/csv',
+            key='download-results'
+        )
 
         st.subheader("Comparative Binding Affinity")
-        st.bar_chart(res, x="Name", y="Binding Score (kcal/mol)", color="Category")
+        fig = px.bar(
+            res,
+            x="Name",
+            y="Binding Score (kcal/mol)",
+            color="Category",
+            title="Binding Affinity by Molecule"
+        )
+        st.plotly_chart(fig, use_container_width=True)
 
         st.write("**Note:** Lower (more negative) scores indicate stronger binding to the Tau fibril.")
 
@@ -175,6 +214,26 @@ with tabs[2]:
 
             view.zoomTo()
             showmol(view, height=600, width=800)
+
+            st.markdown("### Download Structure Data")
+            col_dl1, col_dl2 = st.columns(2)
+            with col_dl1:
+                st.download_button(
+                    label="Download Docked Ligand (PDBQT)",
+                    data=docked_pose,
+                    file_name=f"{selected_mol_name}_docked.pdbqt",
+                    mime="text/plain",
+                    key='dl-docked'
+                )
+            with col_dl2:
+                st.download_button(
+                    label="Download Receptor (PDB)",
+                    data=pdb_content,
+                    file_name="5O3L_receptor.pdb",
+                    mime="text/plain",
+                    key='dl-receptor'
+                )
+
         else:
             st.error("Docking failed for visualization.")
 
@@ -225,10 +284,26 @@ with tabs[3]:
 
         st.subheader("Optimization Trajectory")
         hist_df = pd.DataFrame(history)
-        st.line_chart(hist_df.set_index("generation")['best_score'])
+        fig_opt = px.line(
+            hist_df,
+            x="generation",
+            y="best_score",
+            title="Binding Score Optimization over Generations",
+            markers=True
+        )
+        st.plotly_chart(fig_opt, use_container_width=True)
 
         st.subheader("Optimized Structure")
         st.code(best_smi)
+
+        if best_pose:
+            st.download_button(
+                label="Download Optimized Ligand (PDBQT)",
+                data=best_pose,
+                file_name=f"optimized_{parent_name}.pdbqt",
+                mime="text/plain",
+                key='dl-optimized'
+            )
 
         # Visual Comparison
         st.subheader("Visual Comparison")
