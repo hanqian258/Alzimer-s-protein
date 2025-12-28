@@ -5,3 +5,149 @@ EGCG,Flavonoid,C1C(C(OC2=CC(=CC(=C21)O)O)C3=CC(=C(C(=C3)O)O)O)OC(=O)C4=CC(=C(C(=
 Curcumin,Flavonoid,COC1=C(C=CC(=C1)C=CC(=O)CC(=O)C=CC2=CC(=C(C=C2)O)OC)O,https://pubmed.ncbi.nlm.nih.gov/15590663/
 PBB3,Known Ligand,C1=CN=C(C=C1)C=CC=CC2=CC3=C(C=C2)N(C(=S)N3)C,https://pubmed.ncbi.nlm.nih.gov/24056294/
 T807 (AV-1451),Known Ligand,CN1C2=C(C=N1)C=C(C=C2)C3=CC4=C(C=C3)N=C(N4)C5=CC=CN=C5,https://pubmed.ncbi.nlm.nih.gov/24056294/
+Donepezil,FDA Drug,COC1=C(C=C2C(=C1)CC(C2=O)CC3CCN(CC3)CC4=CC=CC=C4)OC,https://pubchem.ncbi.nlm.nih.gov/compound/Donepezil
+Memantine,FDA Drug,CC12CC3CC(C1)(CC(C3)(C2)N)C,https://pubchem.ncbi.nlm.nih.gov/compound/Memantine
+Galantamine,FDA Drug,CN1CC[C@@]23C=C[C@@H](C[C@@H]2OC4=C(C=CC(=C34)C1)OC)O,https://pubchem.ncbi.nlm.nih.gov/compound/Galantamine
+Rivastigmine,FDA Drug,CCN(C)C(=O)OC1=CC=CC(=C1)[C@H](C)N(C)C,https://pubchem.ncbi.nlm.nih.gov/compound/Rivastigmine
+Aspirin,FDA Drug,CC(=O)OC1=CC=CC=C1C(=O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Aspirin
+Ibuprofen,FDA Drug,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Ibuprofen
+Acetaminophen,FDA Drug,CC(=O)NC1=CC=C(C=C1)O,https://pubchem.ncbi.nlm.nih.gov/compound/Acetaminophen
+Metformin,FDA Drug,CN(C)C(=N)N=C(N)N,https://pubchem.ncbi.nlm.nih.gov/compound/Metformin
+Atorvastatin,FDA Drug,CC(C)C1=C(C(=C(N1CC[C@H](C[C@H](CC(=O)O)O)O)C2=CC=C(C=C2)F)C3=CC=CC=C3)C(=O)NC4=CC=CC=C4,https://pubchem.ncbi.nlm.nih.gov/compound/Atorvastatin
+Lisinopril,FDA Drug,C1C[C@H](N(C1)C(=O)[C@H](CCCCN)N[C@@H](CCC2=CC=CC=C2)C(=O)O)C(=O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Lisinopril
+Amlodipine,FDA Drug,CCOC(=O)C1=C(NC(=C(C1C2=CC=CC=C2Cl)C(=O)OC)C)COCCN,https://pubchem.ncbi.nlm.nih.gov/compound/Amlodipine
+Metoprolol,FDA Drug,CC(C)NCC(COC1=CC=C(C=C1)CCOC)O,https://pubchem.ncbi.nlm.nih.gov/compound/Metoprolol
+Omeprazole,FDA Drug,CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C(N2)C=C(C=C3)OC,https://pubchem.ncbi.nlm.nih.gov/compound/Omeprazole
+Losartan,FDA Drug,CCCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)CO)Cl,https://pubchem.ncbi.nlm.nih.gov/compound/Losartan
+Simvastatin,FDA Drug,CCC(C)(C)C(=O)O[C@H]1C[C@H](C=C2[C@H]1[C@H]([C@H](C=C2)C)CC[C@@H]3C[C@H](CC(=O)O3)O)C,https://pubchem.ncbi.nlm.nih.gov/compound/Simvastatin
+Levothyroxine,FDA Drug,C1=C(C=C(C(=C1I)OC2=CC(=C(C(=C2)I)O)I)I)C[C@@H](C(=O)O)N,https://pubchem.ncbi.nlm.nih.gov/compound/Levothyroxine
+Gabapentin,FDA Drug,C1CCC(CC1)(CC(=O)O)CN,https://pubchem.ncbi.nlm.nih.gov/compound/Gabapentin
+Hydrochlorothiazide,FDA Drug,C1NC2=CC(=C(C=C2S(=O)(=O)N1)S(=O)(=O)N)Cl,https://pubchem.ncbi.nlm.nih.gov/compound/Hydrochlorothiazide
+Sertraline,FDA Drug,CN[C@H]1CC[C@H](C2=CC=CC=C12)C3=CC(=C(C=C3)Cl)Cl,https://pubchem.ncbi.nlm.nih.gov/compound/Sertraline
+Furosemide,FDA Drug,C1=COC(=C1)CNC2=CC(=C(C=C2C(=O)O)S(=O)(=O)N)Cl,https://pubchem.ncbi.nlm.nih.gov/compound/Furosemide
+Fluticasone,FDA Drug,C[C@@H]1C[C@H]2[C@@H]3C[C@@H](C4=CC(=O)C=C[C@@]4([C@]3([C@H](C[C@@]2([C@]1(C(=O)SCF)O)C)O)F)C)F,https://pubchem.ncbi.nlm.nih.gov/compound/Fluticasone
+Amoxicillin,FDA Drug,CC1([C@@H](N2[C@H](S1)[C@@H](C2=O)NC(=O)[C@@H](C3=CC=C(C=C3)O)N)C(=O)O)C,https://pubchem.ncbi.nlm.nih.gov/compound/Amoxicillin
+Alprazolam,FDA Drug,CC1=NN=C2N1C3=C(C=C(C=C3)Cl)C(=NC2)C4=CC=CC=C4,https://pubchem.ncbi.nlm.nih.gov/compound/Alprazolam
+Atenolol,FDA Drug,CC(C)NCC(COC1=CC=C(C=C1)CC(=O)N)O,https://pubchem.ncbi.nlm.nih.gov/compound/Atenolol
+Citalopram,FDA Drug,CN(C)CCCC1(C2=C(CO1)C=C(C=C2)C#N)C3=CC=C(C=C3)F,https://pubchem.ncbi.nlm.nih.gov/compound/Citalopram
+Escitalopram,FDA Drug,CN(C)CCC[C@@]1(C2=C(CO1)C=C(C=C2)C#N)C3=CC=C(C=C3)F,https://pubchem.ncbi.nlm.nih.gov/compound/Escitalopram
+Bupropion,FDA Drug,CC(C(=O)C1=CC(=CC=C1)Cl)NC(C)(C)C,https://pubchem.ncbi.nlm.nih.gov/compound/Bupropion
+Trazodone,FDA Drug,C1CN(CCN1CCCN2C(=O)N3C=CC=CC3=N2)C4=CC(=CC=C4)Cl,https://pubchem.ncbi.nlm.nih.gov/compound/Trazodone
+Tramadol,FDA Drug,CN(C)C[C@H]1CCCC[C@@]1(C2=CC(=CC=C2)OC)O,https://pubchem.ncbi.nlm.nih.gov/compound/Tramadol
+Duloxetine,FDA Drug,CNCC[C@@H](C1=CC=CS1)OC2=CC=CC3=CC=CC=C32,https://pubchem.ncbi.nlm.nih.gov/compound/Duloxetine
+Prednisone,FDA Drug,C[C@]12CC(=O)[C@H]3[C@H]([C@@H]1CC[C@@]2(C(=O)CO)O)CCC4=CC(=O)C=C[C@]34C,https://pubchem.ncbi.nlm.nih.gov/compound/Prednisone
+Montelukast,FDA Drug,CC(C)(C1=CC=CC=C1CC[C@H](C2=CC=CC(=C2)/C=C/C3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Montelukast
+Pantoprazole,FDA Drug,COC1=C(C(=NC=C1)CS(=O)C2=NC3=C(N2)C=C(C=C3)OC(F)F)OC,https://pubchem.ncbi.nlm.nih.gov/compound/Pantoprazole
+Meloxicam,FDA Drug,CC1=CN=C(S1)NC(=O)C2=C(C3=CC=CC=C3S(=O)(=O)N2C)O,https://pubchem.ncbi.nlm.nih.gov/compound/Meloxicam
+Clopidogrel,FDA Drug,COC(=O)[C@H](C1=CC=CC=C1Cl)N2CCC3=C(C2)C=CS3,https://pubchem.ncbi.nlm.nih.gov/compound/Clopidogrel
+Cyclobenzaprine,FDA Drug,CN(C)CCC=C1C2=CC=CC=C2C=CC3=CC=CC=C31,https://pubchem.ncbi.nlm.nih.gov/compound/Cyclobenzaprine
+Methylphenidate,FDA Drug,COC(=O)C(C1CCCCN1)C2=CC=CC=C2,https://pubchem.ncbi.nlm.nih.gov/compound/Methylphenidate
+Zolpidem,FDA Drug,CC1=CC=C(C=C1)C2=C(N3C=C(C=CC3=N2)C)CC(=O)N(C)C,https://pubchem.ncbi.nlm.nih.gov/compound/Zolpidem
+Warfarin,FDA Drug,CC(=O)CC(C1=CC=CC=C1)C2=C(C3=CC=CC=C3OC2=O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Warfarin
+Venlafaxine,FDA Drug,CN(C)CC(C1=CC=C(C=C1)OC)C2(CCCCC2)O,https://pubchem.ncbi.nlm.nih.gov/compound/Venlafaxine
+Clonazepam,FDA Drug,C1C(=O)NC2=C(C=C(C=C2)[N+](=O)[O-])C(=N1)C3=CC=CC=C3Cl,https://pubchem.ncbi.nlm.nih.gov/compound/Clonazepam
+Fluoxetine,FDA Drug,CNCCC(C1=CC=CC=C1)OC2=CC=C(C=C2)C(F)(F)F,https://pubchem.ncbi.nlm.nih.gov/compound/Fluoxetine
+Lorazepam,FDA Drug,C1=CC=C(C(=C1)C2=NC(C(=O)NC3=C2C=C(C=C3)Cl)O)Cl,https://pubchem.ncbi.nlm.nih.gov/compound/Lorazepam
+Celecoxib,FDA Drug,CC1=CC=C(C=C1)C2=CC(=NN2C3=CC=C(C=C3)S(=O)(=O)N)C(F)(F)F,https://pubchem.ncbi.nlm.nih.gov/compound/Celecoxib
+Naproxen,FDA Drug,C[C@@H](C1=CC2=C(C=C1)C=C(C=C2)OC)C(=O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Naproxen
+Doxycycline,FDA Drug,C[C@@H]1[C@H]2[C@@H]([C@H]3[C@@H](C(=O)C(=C([C@]3(C(=O)C2=C(C4=C1C=CC=C4O)O)O)O)C(=O)N)N(C)C)O,https://pubchem.ncbi.nlm.nih.gov/compound/Doxycycline
+Allopurinol,FDA Drug,C1=NNC2=C1C(=O)NC=N2,https://pubchem.ncbi.nlm.nih.gov/compound/Allopurinol
+Amitriptyline,FDA Drug,CN(C)CCC=C1C2=CC=CC=C2CCC3=CC=CC=C31,https://pubchem.ncbi.nlm.nih.gov/compound/Amitriptyline
+Risperidone,FDA Drug,CC1=C(C(=O)N2CCCCC2=N1)CCN3CCC(CC3)C4=NOC5=C4C=CC(=C5)F,https://pubchem.ncbi.nlm.nih.gov/compound/Risperidone
+Levodopa,FDA Drug,C1=CC(=C(C=C1C[C@@H](C(=O)O)N)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Levodopa
+Carbidopa,FDA Drug,C[C@](CC1=CC(=C(C=C1)O)O)(C(=O)O)NN,https://pubchem.ncbi.nlm.nih.gov/compound/Carbidopa
+Entacapone,FDA Drug,CCN(CC)C(=O)/C(=C/C1=CC(=C(C(=C1)O)O)[N+](=O)[O-])/C#N,https://pubchem.ncbi.nlm.nih.gov/compound/Entacapone
+Selegiline,FDA Drug,C[C@H](CC1=CC=CC=C1)N(C)CC#C,https://pubchem.ncbi.nlm.nih.gov/compound/Selegiline
+Rasagiline,FDA Drug,C#CCN[C@@H]1CCC2=CC=CC=C12,https://pubchem.ncbi.nlm.nih.gov/compound/Rasagiline
+Ropinirole,FDA Drug,CCCN(CCC)CCC1=C2CC(=O)NC2=CC=C1,https://pubchem.ncbi.nlm.nih.gov/compound/Ropinirole
+Pramipexole,FDA Drug,CCCN[C@H]1CCC2=C(C1)SC(=N2)N,https://pubchem.ncbi.nlm.nih.gov/compound/Pramipexole
+Quercetin,Flavonoid,C1=CC(=C(C=C1C2=C(C(=O)C3=C(C=C(C=C3O2)O)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Quercetin
+Kaempferol,Flavonoid,C1=CC(=CC=C1C2=C(C(=O)C3=C(C=C(C=C3O2)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Kaempferol
+Myricetin,Flavonoid,C1=C(C=C(C(=C1O)O)O)C2=C(C(=O)C3=C(C=C(C=C3O2)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Myricetin
+Fisetin,Flavonoid,C1=CC(=C(C=C1C2=C(C(=O)C3=C(O2)C=C(C=C3)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Fisetin
+Galangin,Flavonoid,C1=CC=C(C=C1)C2=C(C(=O)C3=C(C=C(C=C3O2)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Galangin
+Baicalein,Flavonoid,C1=CC=C(C=C1)C2=CC(=O)C3=C(O2)C=C(C(=C3O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Baicalein
+Chrysin,Flavonoid,C1=CC=C(C=C1)C2=CC(=O)C3=C(C=C(C=C3O2)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Chrysin
+Scutellarein,Flavonoid,C1=CC(=CC=C1C2=CC(=O)C3=C(O2)C=C(C(=C3O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Scutellarein
+Wogonin,Flavonoid,COC1=C(C=C(C2=C1OC(=CC2=O)C3=CC=CC=C3)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Wogonin
+Hesperetin,Flavonoid,COC1=C(C=C(C=C1)[C@@H]2CC(=O)C3=C(C=C(C=C3O2)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Hesperetin
+Naringenin,Flavonoid,C1[C@H](OC2=CC(=CC(=C2C1=O)O)O)C3=CC=C(C=C3)O,https://pubchem.ncbi.nlm.nih.gov/compound/Naringenin
+Eriodictyol,Flavonoid,C1[C@H](OC2=CC(=CC(=C2C1=O)O)O)C3=CC(=C(C=C3)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Eriodictyol
+Homoeriodictyol,Flavonoid,COC1=C(C=CC(=C1)[C@@H]2CC(=O)C3=C(C=C(C=C3O2)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Homoeriodictyol
+Taxifolin,Flavonoid,C1=CC(=C(C=C1[C@@H]2[C@H](C(=O)C3=C(C=C(C=C3O2)O)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Taxifolin
+Dihydrokaempferol,Flavonoid,C1=CC(=CC=C1[C@@H]2[C@H](C(=O)C3=C(C=C(C=C3O2)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Dihydrokaempferol
+Dihydroquercetin,Flavonoid,C1=CC(=C(C=C1[C@@H]2[C@H](C(=O)C3=C(C=C(C=C3O2)O)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Dihydroquercetin
+Dihydromyricetin,Flavonoid,C1=C(C=C(C(=C1O)O)O)[C@@H]2[C@H](C(=O)C3=C(C=C(C=C3O2)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Dihydromyricetin
+Catechin,Flavonoid,C1[C@@H]([C@H](OC2=CC(=CC(=C21)O)O)C3=CC(=C(C=C3)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Catechin
+Epicatechin,Flavonoid,C1[C@H]([C@H](OC2=CC(=CC(=C21)O)O)C3=CC(=C(C=C3)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Epicatechin
+Gallocatechin,Flavonoid,C1[C@@H]([C@H](OC2=CC(=CC(=C21)O)O)C3=CC(=C(C(=C3)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Gallocatechin
+Epigallocatechin,Flavonoid,C1[C@H]([C@H](OC2=CC(=CC(=C21)O)O)C3=CC(=C(C(=C3)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Epigallocatechin
+Epicatechin gallate,Flavonoid,C1[C@H]([C@H](OC2=CC(=CC(=C21)O)O)C3=CC(=C(C=C3)O)O)OC(=O)C4=CC(=C(C(=C4)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Epicatechin gallate
+Epigallocatechin gallate,Flavonoid,C1[C@H]([C@H](OC2=CC(=CC(=C21)O)O)C3=CC(=C(C(=C3)O)O)O)OC(=O)C4=CC(=C(C(=C4)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Epigallocatechin gallate
+Theaflavin,Flavonoid,C1[C@H]([C@H](OC2=CC(=CC(=C21)O)O)C3=CC4=C(C(=C(C=C4[C@@H]5[C@@H](CC6=C(C=C(C=C6O5)O)O)O)O)O)C(=O)C(=C3)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Theaflavin
+Procyanidin B1,Flavonoid,C1[C@@H]([C@H](OC2=C1C(=CC(=C2[C@@H]3[C@H]([C@H](OC4=CC(=CC(=C34)O)O)C5=CC(=C(C=C5)O)O)O)O)O)C6=CC(=C(C=C6)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Procyanidin B1
+Procyanidin B2,Flavonoid,C1[C@H]([C@H](OC2=C1C(=CC(=C2[C@@H]3[C@H]([C@H](OC4=CC(=CC(=C34)O)O)C5=CC(=C(C=C5)O)O)O)O)O)C6=CC(=C(C=C6)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Procyanidin B2
+Genistein,Flavonoid,C1=CC(=CC=C1C2=COC3=CC(=CC(=C3C2=O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Genistein
+Daidzein,Flavonoid,C1=CC(=CC=C1C2=COC3=C(C2=O)C=CC(=C3)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Daidzein
+Glycitein,Flavonoid,COC1=C(C=C2C(=C1)C(=O)C(=CO2)C3=CC=C(C=C3)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Glycitein
+Formononetin,Flavonoid,COC1=CC=C(C=C1)C2=COC3=C(C2=O)C=CC(=C3)O,https://pubchem.ncbi.nlm.nih.gov/compound/Formononetin
+Biochanin A,Flavonoid,COC1=CC=C(C=C1)C2=COC3=CC(=CC(=C3C2=O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Biochanin A
+Cyanidin,Flavonoid,C1=CC(=C(C=C1C2=[O+]C3=CC(=CC(=C3C=C2O)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Cyanidin
+Delphinidin,Flavonoid,C1=C(C=C(C(=C1O)O)O)C2=[O+]C3=CC(=CC(=C3C=C2O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Delphinidin
+Malvidin,Flavonoid,COC1=CC(=CC(=C1O)OC)C2=[O+]C3=CC(=CC(=C3C=C2O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Malvidin
+Peonidin,Flavonoid,COC1=C(C=CC(=C1)C2=[O+]C3=CC(=CC(=C3C=C2O)O)O)O.[Cl-],https://pubchem.ncbi.nlm.nih.gov/compound/Peonidin
+Petunidin,Flavonoid,COC1=CC(=CC(=C1O)O)C2=[O+]C3=CC(=CC(=C3C=C2O)O)O.[Cl-],https://pubchem.ncbi.nlm.nih.gov/compound/Petunidin
+Phloretin,Flavonoid,C1=CC(=CC=C1CCC(=O)C2=C(C=C(C=C2O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Phloretin
+Isoliquiritigenin,Flavonoid,C1=CC(=CC=C1/C=C/C(=O)C2=C(C=C(C=C2)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Isoliquiritigenin
+Butein,Flavonoid,C1=CC(=C(C=C1/C=C/C(=O)C2=C(C=C(C=C2)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Butein
+Tangeretin,Flavonoid,COC1=CC=C(C=C1)C2=CC(=O)C3=C(O2)C(=C(C(=C3OC)OC)OC)OC,https://pubchem.ncbi.nlm.nih.gov/compound/Tangeretin
+Nobiletin,Flavonoid,COC1=C(C=C(C=C1)C2=CC(=O)C3=C(O2)C(=C(C(=C3OC)OC)OC)OC)OC,https://pubchem.ncbi.nlm.nih.gov/compound/Nobiletin
+Sinensetin,Flavonoid,COC1=C(C=C(C=C1)C2=CC(=O)C3=C(C(=C(C=C3O2)OC)OC)OC)OC,https://pubchem.ncbi.nlm.nih.gov/compound/Sinensetin
+Rutin,Flavonoid,C[C@H]1[C@@H]([C@H]([C@H]([C@@H](O1)OC[C@@H]2[C@H]([C@@H]([C@H]([C@@H](O2)OC3=C(OC4=CC(=CC(=C4C3=O)O)O)C5=CC(=C(C=C5)O)O)O)O)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Rutin
+Hesperidin,Flavonoid,C[C@H]1[C@@H]([C@H]([C@H]([C@@H](O1)OC[C@@H]2[C@H]([C@@H]([C@H]([C@@H](O2)OC3=CC(=C4C(=O)C[C@H](OC4=C3)C5=CC(=C(C=C5)OC)O)O)O)O)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Hesperidin
+Naringin,Flavonoid,C[C@H]1[C@@H]([C@H]([C@H]([C@@H](O1)O[C@@H]2[C@H]([C@@H]([C@H](O[C@H]2OC3=CC(=C4C(=O)C[C@H](OC4=C3)C5=CC=C(C=C5)O)O)CO)O)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Naringin
+Morin,Flavonoid,C1=CC(=C(C=C1O)O)C2=C(C(=O)C3=C(C=C(C=C3O2)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Morin
+Baicalin,Flavonoid,C1=CC=C(C=C1)C2=CC(=O)C3=C(C(=C(C=C3O2)O[C@H]4[C@@H]([C@H]([C@@H]([C@H](O4)C(=O)O)O)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Baicalin
+Wogonoside,Flavonoid,COC1=C(C=C(C2=C1OC(=CC2=O)C3=CC=CC=C3)O)O[C@H]4[C@@H]([C@H]([C@@H]([C@H](O4)C(=O)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Wogonoside
+Liquiritigenin,Flavonoid,C1[C@H](OC2=C(C1=O)C=CC(=C2)O)C3=CC=C(C=C3)O,https://pubchem.ncbi.nlm.nih.gov/compound/Liquiritigenin
+Glycyrrhizin,Flavonoid,C[C@]12CC[C@](C[C@H]1C3=CC(=O)[C@@H]4[C@]5(CC[C@@H](C([C@@H]5CC[C@]4([C@@]3(CC2)C)C)(C)C)O[C@@H]6[C@@H]([C@H]([C@@H]([C@H](O6)C(=O)O)O)O)O[C@H]7[C@@H]([C@H]([C@@H]([C@H](O7)C(=O)O)O)O)O)C)(C)C(=O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Glycyrrhizin
+Silibinin,Flavonoid,COC1=C(C=CC(=C1)[C@@H]2[C@H](OC3=C(O2)C=C(C=C3)[C@@H]4[C@H](C(=O)C5=C(C=C(C=C5O4)O)O)O)CO)O,https://pubchem.ncbi.nlm.nih.gov/compound/Silibinin
+Anandamide,Known Ligand,CCCCC/C=C\C/C=C\C/C=C\C/C=C\CCCC(=O)NCCO,https://pubchem.ncbi.nlm.nih.gov/compound/Anandamide
+Surfen,Known Ligand,CC1=CC(=C2C=C(C=CC2=N1)NC(=O)NC3=CC4=C(C=C(N=C4C=C3)C)N)N.Cl.Cl,https://pubchem.ncbi.nlm.nih.gov/compound/Surfen
+Levistolide A,Known Ligand,CCC/C=C\1/C2=C([C@H]3[C@@H](CC2)[C@@H]4CC[C@@]3\5C(=C4)C(=O)O/C5=C\CCC)C(=O)O1,https://pubchem.ncbi.nlm.nih.gov/compound/Levistolide A
+Leucomethylene blue,Known Ligand,CN(C)C1=CC2=C(C=C1)NC3=C(S2)C=C(C=C3)N(C)C,https://pubchem.ncbi.nlm.nih.gov/compound/Leucomethylene blue
+C004019,Known Ligand,CC1=C(SC=N1)C2=CC=C(C=C2)CNC(=O)[C@H]3C[C@@H](CN3C(=O)[C@H](C(C)(C)C)NC(=O)COCCOCCOCCNC(=O)CN(C)C4=NC(=NC(=N4)N5CCCN(CC5)C(=O)C)NCCC6=CC=CS6)O,https://pubchem.ncbi.nlm.nih.gov/compound/C004019
+QC-01-175,Known Ligand,C1CC(=O)NC(=O)C1N2C(=O)C3=C(C2=O)C(=CC=C3)NCCOCCOCCNC(=O)CCC4=CC5=C(C=C4)C6=C(N5)C=CN=C6,https://pubchem.ncbi.nlm.nih.gov/compound/QC-01-175
+TTBK1-IN-1,Known Ligand,CC[C@@](C)(C#CC1=CC2=C(C=CN2C3=CC(=NC(=N3)N)OC)C=N1)O,https://pubchem.ncbi.nlm.nih.gov/compound/TTBK1-IN-1
+Verbenalin,Known Ligand,C[C@H]1CC(=O)[C@H]2[C@@H]1[C@@H](OC=C2C(=O)OC)O[C@H]3[C@@H]([C@H]([C@@H]([C@H](O3)CO)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Verbenalin
+Ceperognastat,Known Ligand,C[C@H]1C[C@H](CCN1CC2=C(N=C(S2)NC(=O)C)F)OCC3=NOC(=N3)C,https://pubchem.ncbi.nlm.nih.gov/compound/Ceperognastat
+PhosTAC7,Known Ligand,CC[C@@H](C1=CC(=C(C(=C1)OC)OC)OC)C(=O)N2CCCC[C@H]2C(=O)O[C@H](CCC3=CC(=C(C=C3)OC)OC)C4=CC(=CC=C4)OCC(=O)NCCOCCOCCOCCOCCOCCOCCOCCCCCCCl,https://pubchem.ncbi.nlm.nih.gov/compound/PhosTAC7
+Simufilam,Known Ligand,CN1CCC2(CC1)NCC(=O)N2CC3=CC=CC=C3,https://pubchem.ncbi.nlm.nih.gov/compound/Simufilam
+TRx0237,Known Ligand,CN(C)C1=CC2=C(C=C1)NC3=C(S2)C=C(C=C3)N(C)C.Br.Br,https://pubchem.ncbi.nlm.nih.gov/compound/TRx0237
+LMTM,Known Ligand,CN(C)C1=CC2=C(C=C1)NC3=C(S2)C=C(C=C3)N(C)C.CS(=O)(=O)O.CS(=O)(=O)O,https://pubchem.ncbi.nlm.nih.gov/compound/LMTM
+Tideglusib,Known Ligand,C1=CC=C(C=C1)CN2C(=O)N(SC2=O)C3=CC=CC4=CC=CC=C43,https://pubchem.ncbi.nlm.nih.gov/compound/Tideglusib
+Lithium carbonate,Known Ligand,[Li+].[Li+].C(=O)([O-])[O-],https://pubchem.ncbi.nlm.nih.gov/compound/Lithium carbonate
+Valproate,Known Ligand,CCCC(CCC)C(=O)[O-],https://pubchem.ncbi.nlm.nih.gov/compound/Valproate
+Tannic acid,Known Ligand,C1=C(C=C(C(=C1O)O)O)C(=O)OC2=CC(=CC(=C2O)O)C(=O)OC[C@@H]3[C@H]([C@@H]([C@H]([C@@H](O3)OC(=O)C4=CC(=C(C(=C4)OC(=O)C5=CC(=C(C(=C5)O)O)O)O)O)OC(=O)C6=CC(=C(C(=C6)OC(=O)C7=CC(=C(C(=C7)O)O)O)O)O)OC(=O)C8=CC(=C(C(=C8)OC(=O)C9=CC(=C(C(=C9)O)O)O)O)O)OC(=O)C1=CC(=C(C(=C1)OC(=O)C1=CC(=C(C(=C1)O)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Tannic acid
+Oleocanthal,Known Ligand,C/C=C(/C=O)\[C@@H](CC=O)CC(=O)OCCC1=CC=C(C=C1)O,https://pubchem.ncbi.nlm.nih.gov/compound/Oleocanthal
+Resveratrol,Known Ligand,C1=CC(=CC=C1/C=C/C2=CC(=CC(=C2)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Resveratrol
+Berberine,Known Ligand,COC1=C(C2=C[N+]3=C(C=C2C=C1)C4=CC5=C(C=C4CC3)OCO5)OC,https://pubchem.ncbi.nlm.nih.gov/compound/Berberine
+Palmatine,Known Ligand,COC1=C(C2=C[N+]3=C(C=C2C=C1)C4=CC(=C(C=C4CC3)OC)OC)OC,https://pubchem.ncbi.nlm.nih.gov/compound/Palmatine
+Jatrorrhizine,Known Ligand,COC1=C(C2=C[N+]3=C(C=C2C=C1)C4=CC(=C(C=C4CC3)O)OC)OC,https://pubchem.ncbi.nlm.nih.gov/compound/Jatrorrhizine
+Coptisine,Known Ligand,C1C[N+]2=C(C=C3C=CC4=C(C3=C2)OCO4)C5=CC6=C(C=C51)OCO6,https://pubchem.ncbi.nlm.nih.gov/compound/Coptisine
+Epiberberine,Known Ligand,COC1=C(C=C2C(=C1)CC[N+]3=C2C=C4C=CC5=C(C4=C3)OCO5)OC,https://pubchem.ncbi.nlm.nih.gov/compound/Epiberberine
+Rosuvastatin,FDA Drug,CC(C)C1=NC(=NC(=C1/C=C/[C@H](C[C@H](CC(=O)O)O)O)C2=CC=C(C=C2)F)N(C)S(=O)(=O)C,https://pubchem.ncbi.nlm.nih.gov/compound/Rosuvastatin
+Pravastatin,FDA Drug,CC[C@H](C)C(=O)O[C@H]1C[C@@H](C=C2[C@H]1[C@H]([C@H](C=C2)C)CC[C@H](C[C@H](CC(=O)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Pravastatin
+Carvedilol,FDA Drug,COC1=CC=CC=C1OCCNCC(COC2=CC=CC3=C2C4=CC=CC=C4N3)O,https://pubchem.ncbi.nlm.nih.gov/compound/Carvedilol
+Isorhamnetin,Flavonoid,COC1=C(C=CC(=C1)C2=C(C(=O)C3=C(C=C(C=C3O2)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Isorhamnetin
+Luteolin,Flavonoid,C1=CC(=C(C=C1C2=CC(=O)C3=C(C=C(C=C3O2)O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Luteolin
+Apigenin,Flavonoid,C1=CC(=CC=C1C2=CC(=O)C3=C(C=C(C=C3O2)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Apigenin
+Pelargonidin,Flavonoid,C1=CC(=CC=C1C2=[O+]C3=CC(=CC(=C3C=C2O)O)O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Pelargonidin
+Emodin,Known Ligand,CC1=CC2=C(C(=C1)O)C(=O)C3=C(C2=O)C=C(C=C3O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Emodin
+Daunorubicin,Known Ligand,C[C@H]1[C@H]([C@H](C[C@@H](O1)O[C@H]2C[C@@](CC3=C2C(=C4C(=C3O)C(=O)C5=C(C4=O)C(=CC=C5)OC)O)(C(=O)C)O)N)O,https://pubchem.ncbi.nlm.nih.gov/compound/Daunorubicin
+Mitoxantrone,Known Ligand,C1=CC(=C2C(=C1NCCNCCO)C(=O)C3=C(C=CC(=C3C2=O)O)O)NCCNCCO,https://pubchem.ncbi.nlm.nih.gov/compound/Mitoxantrone
+Pixantrone,Known Ligand,C1=CC(=C2C(=C1NCCN)C(=O)C3=C(C2=O)C=NC=C3)NCCN,https://pubchem.ncbi.nlm.nih.gov/compound/Pixantrone
+Epalrestat,Known Ligand,C/C(=C\C1=CC=CC=C1)/C=C\2/C(=O)N(C(=S)S2)CC(=O)O,https://pubchem.ncbi.nlm.nih.gov/compound/Epalrestat
+Troglitazone,Known Ligand,CC1=C(C2=C(CCC(O2)(C)COC3=CC=C(C=C3)CC4C(=O)NC(=O)S4)C(=C1O)C)C,https://pubchem.ncbi.nlm.nih.gov/compound/Troglitazone
+C11,Known Ligand,CCN\1C2=CC=CC=C2S/C1=C\C(=C\C3=[N+](C4=CC=CC=C4S3)CC)\C.[I-],https://pubchem.ncbi.nlm.nih.gov/compound/C11
+AQ2S,Known Ligand,C1=CC=C2C(=C1)C(=O)C3=C(C2=O)C=C(C=C3)S(=O)(=O)O,https://pubchem.ncbi.nlm.nih.gov/compound/AQ2S
