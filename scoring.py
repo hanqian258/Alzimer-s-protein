@@ -1,5 +1,5 @@
 import math
-
+from typing import Tuple, List, Optional
 
 def calculate_kd(delta_g: float, temperature: float = 298.15) -> float:
     """
@@ -60,3 +60,52 @@ def get_score_color(delta_g: float) -> str:
         return "#DAA520"  # GoldenRod
     else:
         return "#B22222"  # FireBrick
+
+def get_ligand_centroid(pdbqt_string: str) -> Optional[Tuple[float, float, float]]:
+    """
+    Parses a PDBQT string and calculates the geometric centroid of the ligand.
+
+    Args:
+        pdbqt_string (str): The content of the PDBQT file.
+
+    Returns:
+        Optional[Tuple[float, float, float]]: The (x, y, z) centroid, or None if no atoms found.
+    """
+    x_sum = 0.0
+    y_sum = 0.0
+    z_sum = 0.0
+    count = 0
+
+    lines = pdbqt_string.splitlines()
+    for line in lines:
+        if line.startswith("ATOM") or line.startswith("HETATM"):
+            try:
+                # PDB format: X is 30-38, Y is 38-46, Z is 46-54
+                x = float(line[30:38])
+                y = float(line[38:46])
+                z = float(line[46:54])
+
+                x_sum += x
+                y_sum += y
+                z_sum += z
+                count += 1
+            except ValueError:
+                continue
+
+    if count == 0:
+        return None
+
+    return (x_sum / count, y_sum / count, z_sum / count)
+
+def calculate_distance(p1: Tuple[float, float, float], p2: Tuple[float, float, float]) -> float:
+    """
+    Calculates Euclidean distance between two 3D points.
+
+    Args:
+        p1: (x, y, z) tuple
+        p2: (x, y, z) tuple
+
+    Returns:
+        float: The distance.
+    """
+    return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2 + (p1[2] - p2[2])**2)

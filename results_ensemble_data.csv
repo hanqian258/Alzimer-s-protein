@@ -1,0 +1,7 @@
+Experiment_Mode,Model_ID,Binding_Energy,Distance_to_Zipper,Ligand_SMILES
+Single (A),Model_1,-3.004,6.300630322190157,Cc1ccccc1
+Single (A),Model_5,-2.973,2.3247600393615255,Cc1ccccc1
+Single (A),Model_10,-3.755,1.7541677346498201,Cc1ccccc1
+Ensemble (B),Model_1,-3.188,6.3818789914857375,Cc1ccccc1C
+Ensemble (B),Model_5,-3.312,2.4182267122288548,Cc1ccccc1C
+Ensemble (B),Model_10,-3.98,2.461893418846435,Cc1ccccc1C
