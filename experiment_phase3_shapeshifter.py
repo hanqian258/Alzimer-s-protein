@@ -1,8 +1,10 @@
 import json
 import os
+import pandas as pd
 import prep_shapes
 import evolution
 import docking
+import scoring
 
 def main():
     print("=== Phase 1: Data Preparation ===")
@@ -43,8 +45,9 @@ def main():
         }
     ]
 
-    # Validation Config (Models 1, 5, 10) - same as B for scoring
-    config_val = config_b
+    # Validation Config (Models 1, 5, 10)
+    # We will manually iterate over these for detailed logging
+    validation_models = ["1", "5", "10"]
 
     initial_smiles = "c1ccccc1" # Benzene start
 
@@ -70,26 +73,56 @@ def main():
 
     print("\n=== Phase 3: The Gauntlet (Validation) ===")
 
-    # Dock A against Ensemble
-    pdbqt_a = docking.prep_ligand(smi_a, "Mol_A")
-    val_score_a, _ = docking.run_docking_on_list(pdbqt_a, config_val)
+    results = []
 
-    # Dock B against Ensemble
-    pdbqt_b = docking.prep_ligand(smi_b, "Mol_B")
-    val_score_b, _ = docking.run_docking_on_list(pdbqt_b, config_val)
+    # Function to run validation
+    def run_validation(smiles, experiment_mode, label):
+        pdbqt = docking.prep_ligand(smiles, label)
+        if not pdbqt:
+            print(f"Failed to prep {label}")
+            return
 
-    print("-" * 60)
-    print(f"{'Metric':<30} | {'Drug A (Single)':<12} | {'Drug B (Ensemble)':<12}")
-    print("-" * 60)
-    print(f"{'SMILES':<30} | {smi_a:<12} | {smi_b:<12}")
-    print(f"{'Training Score':<30} | {score_a:<12.2f} | {score_b:<12.2f}")
-    print(f"{'Validation Score (Avg 1,5,10)':<30} | {val_score_a:<12.2f} | {val_score_b:<12.2f}")
-    print("-" * 60)
+        for model_id in validation_models:
+            model_path = f"data/2MZ7_model_{model_id}.pdbqt"
+            center = centers.get(model_id)
 
-    if val_score_b < val_score_a:
-        print("\nConclusion: The Ensemble-trained drug (B) is more robust across conformations.")
-    else:
-        print("\nConclusion: The Single-structure drug (A) performed better or equal (Result might vary with short run).")
+            if not os.path.exists(model_path) or not center:
+                print(f"Skipping Model {model_id}, missing file or center.")
+                continue
+
+            # Run Docking
+            score, pose = docking.run_docking(pdbqt, model_path, center)
+
+            dist = 0.0
+            if pose:
+                # Calculate Centroid of Ligand
+                lig_centroid = scoring.get_ligand_centroid(pose)
+                if lig_centroid:
+                    # Calculate Distance to Receptor Zipper Center
+                    dist = scoring.calculate_distance(lig_centroid, center)
+
+            # Log Data
+            results.append({
+                "Experiment_Mode": experiment_mode,
+                "Model_ID": f"Model_{model_id}",
+                "Binding_Energy": score if score is not None else 0.0,
+                "Distance_to_Zipper": dist,
+                "Ligand_SMILES": smiles
+            })
+            print(f"  > {label} vs Model {model_id}: Score={score}, Dist={dist:.2f}")
+
+    print("Validating Single-Structure Drug (A)...")
+    run_validation(smi_a, "Single (A)", "Mol_A")
+
+    print("Validating Ensemble Drug (B)...")
+    run_validation(smi_b, "Ensemble (B)", "Mol_B")
+
+    # Save to CSV
+    csv_path = "results_ensemble_data.csv"
+    df = pd.DataFrame(results)
+    df.to_csv(csv_path, index=False)
+    print(f"\nResults saved to {csv_path}")
+    print(df)
 
 if __name__ == "__main__":
     main()
