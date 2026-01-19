@@ -217,3 +217,40 @@ def run_docking(
         if os.path.exists(tmp_lig_path):
             os.remove(tmp_lig_path)
         return None, None
+
+def run_docking_on_list(ligand_pdbqt, receptor_configs):
+    """
+    Runs docking against multiple receptor configurations and returns the average score.
+
+    receptor_configs: List of dicts, e.g.,
+    [
+      {'path': 'data/rec1.pdbqt', 'center': (0,0,0)},
+      {'path': 'data/rec2.pdbqt', 'center': (1,1,1)}
+    ]
+    """
+    scores = []
+    poses = []
+
+    for config in receptor_configs:
+        path = config.get('path')
+        center = config.get('center')
+        if not path or not center:
+            continue
+
+        score, pose = run_docking(ligand_pdbqt, path, center)
+        if score is not None:
+            scores.append(score)
+            poses.append(pose)
+
+    if not scores:
+        return None, None
+
+    avg_score = sum(scores) / len(scores)
+    # Return the best pose (lowest energy) as the representative pose
+    best_idx = scores.index(min(scores))
+    best_pose = poses[best_idx]
+
+    return avg_score, best_pose
+
+if __name__ == "__main__":
+    pass
