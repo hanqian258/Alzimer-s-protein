@@ -65,10 +65,25 @@ def mutate_molecule(smiles, mutation_rate=0.1):
         # print(f"Mutation failed: {e}")
         return smiles
 
-def evolve_ligand(initial_smiles, receptor_pdbqt, center, generations=5, population_size=5):
+def evolve_ligand(initial_smiles, receptor_configs, center=None, generations=5, population_size=5):
     """
     Genetic Algorithm to evolve the ligand.
+
+    receptor_configs: Can be:
+      - A single path string (legacy support).
+      - A list of dicts [{'path': str, 'center': tuple}, ...] for multi-target docking.
+
+    center: Only used if receptor_configs is a string path.
     """
+
+    # Normalize receptor_configs
+    if isinstance(receptor_configs, str):
+        if center is None:
+            raise ValueError("Center must be provided if receptor_configs is a path string.")
+        configs = [{'path': receptor_configs, 'center': center}]
+    else:
+        configs = receptor_configs
+
     current_population = [initial_smiles]
     best_overall_score = 0
     best_overall_smiles = initial_smiles
@@ -80,7 +95,7 @@ def evolve_ligand(initial_smiles, receptor_pdbqt, center, generations=5, populat
     print("Evaluating initial structure...")
     pdbqt = docking.prep_ligand(initial_smiles, "Initial")
     if pdbqt:
-        score, docked_pose = docking.run_docking(pdbqt, receptor_pdbqt, center)
+        score, docked_pose = docking.run_docking_on_list(pdbqt, configs)
         if score:
             best_overall_score = score
             best_overall_pdbqt = docked_pose
@@ -108,7 +123,7 @@ def evolve_ligand(initial_smiles, receptor_pdbqt, center, generations=5, populat
         for i, smi in enumerate(offspring):
             pdbqt = docking.prep_ligand(smi, f"Gen{gen}_Mol{i}")
             if pdbqt:
-                score, docked_pose = docking.run_docking(pdbqt, receptor_pdbqt, center)
+                score, docked_pose = docking.run_docking_on_list(pdbqt, configs)
                 if score is not None:
                     results.append((score, smi, docked_pose))
 
