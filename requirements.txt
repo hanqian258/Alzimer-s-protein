@@ -7,3 +7,5 @@ stmol
 scipy
 requests
 plotly
+gemmi
+ipython_genutils
