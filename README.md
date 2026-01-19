@@ -42,19 +42,28 @@ pip install -r requirements.txt
 
 ## Usage
 
-To launch the interactive dashboard, run the following command in your terminal:
+To launch the interactive dashboard, run one of the following commands in your terminal:
 
 ```bash
 streamlit run app.py
 ```
 
+**Alternative Command:**
+If the command above does not work (e.g., "command not found"), try running via the Python module:
+
+```bash
+python3 -m streamlit run app.py
+```
+
+> **Important:** Do **not** run the application using `python app.py` or `python3 app.py`. This will not start the web server correctly.
+
 This will open the application in your default web browser (usually at `http://localhost:8501`).
 
 ### Dashboard Features:
-*   **Molecule Library:** Browse and download datasets of FDA drugs, Flavonoids, and Known Ligands.
-*   **Docking Simulation:** Run high-throughput screening of the library against the Tau Fibril (PDB: 5O3L).
-*   **Visualization:** Interactively view 3D docked poses of ligands and the receptor with customizable styles (Cartoon, Stick, Surface).
-*   **AI Optimization:** Use the Evolutionary Algorithm to evolve a molecule structure (Genetic Algorithm) for improved binding affinity.
+*   **Research Findings:** Explore the data comparing single-structure vs. ensemble docking strategies, including binding energy distributions and ligand stability metrics.
+*   **Interactive Validation:**
+    *   **3D Visualization:** Interactively view 3D docked poses of ligands and the receptor with customizable styles.
+    *   **AI Optimization:** Real-time demonstration of the Evolutionary Algorithm optimizing a molecule structure.
 
 ## Reproducing Science Fair Results
 
