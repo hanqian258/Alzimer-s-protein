@@ -1,8 +1,9 @@
 import os
 from rdkit import Chem
-from rdkit.Chem import AllChem
+from typing import Tuple
 
-def prep_protein(input_pdb, output_pdbqt):
+
+def prep_protein(input_pdb: str, output_pdbqt: str) -> Tuple[float, float, float]:
     """
     Extracts the first model from the PDB file and converts it to PDBQT format.
     Calculates the center of the VQIVYK region (Residues 306-311 in full Tau numbering).
@@ -13,6 +14,13 @@ def prep_protein(input_pdb, output_pdbqt):
 
     In 5O3L PDB file, the residues are renumbered.
     We need to identify the VQIVYK sequence (Val-Gln-Ile-Val-Tyr-Lys).
+
+    Args:
+        input_pdb (str): Path to the input PDB file.
+        output_pdbqt (str): Path to the output PDBQT file.
+
+    Returns:
+        Tuple[float, float, float]: The center coordinates (x, y, z) of the target region.
     """
 
     # Load PDB
@@ -27,7 +35,7 @@ def prep_protein(input_pdb, output_pdbqt):
     # In PDB 5O3L, residue numbers might be preserved (306-378).
     # Let's check for residues 306 to 311.
 
-    target_res_nums = set([306, 307, 308, 309, 310, 311])
+    target_res_nums = {306, 307, 308, 309, 310, 311}
 
     found_atoms = 0
     for atom in mol.GetAtoms():
@@ -70,8 +78,8 @@ def prep_protein(input_pdb, output_pdbqt):
         if line.startswith("ATOM") or line.startswith("HETATM"):
             element = line[76:78].strip()
             if not element:
-                 atom_name = line[12:16].strip()
-                 element = atom_name[0]
+                atom_name = line[12:16].strip()
+                element = atom_name[0]
 
             ad_type = atom_types.get(element, 'A')
 
@@ -90,7 +98,11 @@ def prep_protein(input_pdb, output_pdbqt):
     print(f"Written {output_pdbqt}")
     return center
 
+
 if __name__ == "__main__":
-    center = prep_protein("data/5O3L.pdb", "data/receptor.pdbqt")
-    with open("data/config.txt", "w") as f:
-        f.write(f"{center[0]},{center[1]},{center[2]}")
+    if os.path.exists("data/5O3L.pdb"):
+        center_coords = prep_protein("data/5O3L.pdb", "data/receptor.pdbqt")
+        with open("data/config.txt", "w") as f:
+            f.write(f"{center_coords[0]},{center_coords[1]},{center_coords[2]}")
+    else:
+        print("Error: data/5O3L.pdb not found.")

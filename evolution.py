@@ -1,29 +1,38 @@
 import random
+from typing import List, Tuple, Any, Optional, Dict
 from rdkit import Chem
-from rdkit.Chem import AllChem
 import docking
-import pandas as pd
 
-def mutate_molecule(smiles, mutation_rate=0.1):
+
+def mutate_molecule(smiles: str, mutation_rate: float = 0.1) -> str:
     """
     Applies random mutations to a molecule string.
+
+    This function attempts to mimic evolutionary mutations by modifying the molecular structure.
     Supported mutations:
     - Add a carbon atom (methyl group) to a random atom.
     - Remove a random terminal atom.
-    - Change an atom type (C -> N, N -> O, etc).
+    - Change an atom type (substitute C, N, O, F).
 
-    This is a simplified mutation strategy for demonstration.
+    Args:
+        smiles (str): The SMILES string of the molecule to mutate.
+        mutation_rate (float): The probability of mutation (currently unused but reserved for future logic).
+
+    Returns:
+        str: The SMILES string of the mutated molecule, or the original SMILES if mutation fails.
     """
     try:
         mol = Chem.MolFromSmiles(smiles)
-        if mol is None: return smiles
+        if mol is None:
+            return smiles
 
         # Clone molecule
         rw_mol = Chem.RWMol(mol)
         atoms = [a for a in rw_mol.GetAtoms()]
         num_atoms = len(atoms)
 
-        if num_atoms == 0: return smiles
+        if num_atoms == 0:
+            return smiles
 
         mutation_type = random.choice(['add', 'remove', 'substitute'])
 
@@ -32,7 +41,7 @@ def mutate_molecule(smiles, mutation_rate=0.1):
             idx = random.randint(0, num_atoms - 1)
             atom = rw_mol.GetAtomWithIdx(idx)
             if atom.GetImplicitValence() > 0:
-                new_idx = rw_mol.AddAtom(Chem.Atom(6)) # Add Carbon
+                new_idx = rw_mol.AddAtom(Chem.Atom(6))  # Add Carbon
                 rw_mol.AddBond(idx, new_idx, Chem.BondType.SINGLE)
 
         elif mutation_type == 'remove':
@@ -47,7 +56,7 @@ def mutate_molecule(smiles, mutation_rate=0.1):
             idx = random.randint(0, num_atoms - 1)
             atom = rw_mol.GetAtomWithIdx(idx)
             current_atomic_num = atom.GetAtomicNum()
-            choices = [6, 7, 8, 9] # C, N, O, F
+            choices = [6, 7, 8, 9]  # C, N, O, F
             if current_atomic_num in choices:
                 choices.remove(current_atomic_num)
             new_atomic_num = random.choice(choices)
@@ -58,19 +67,48 @@ def mutate_molecule(smiles, mutation_rate=0.1):
             Chem.SanitizeMol(rw_mol)
             new_smiles = Chem.MolToSmiles(rw_mol)
             return new_smiles
-        except:
-            return smiles # Return original if mutation failed
+        except Exception:
+            return smiles  # Return original if mutation failed
 
-    except Exception as e:
+    except Exception:
         # print(f"Mutation failed: {e}")
         return smiles
 
-def evolve_ligand(initial_smiles, receptor_pdbqt, center, generations=5, population_size=5):
+
+def evolve_ligand(
+    initial_smiles: str,
+    receptor_pdbqt: str,
+    center: Tuple[float, float, float],
+    generations: int = 5,
+    population_size: int = 5
+) -> Tuple[float, str, Optional[str], List[Dict[str, Any]]]:
     """
-    Genetic Algorithm to evolve the ligand.
+    Runs a Genetic Algorithm (Evolutionary Algorithm) to optimize a ligand's structure for binding affinity.
+
+    The algorithm follows these steps:
+    1. Evaluate the initial molecule.
+    2. For each generation:
+       a. Generate offspring by mutating members of the current population.
+       b. Dock each offspring to calculate its binding score.
+       c. Select the top performers to form the next generation.
+    3. Track the best score and structure across all generations.
+
+    Args:
+        initial_smiles (str): The starting molecule's SMILES string.
+        receptor_pdbqt (str): Path to the receptor PDBQT file.
+        center (Tuple[float, float, float]): The center coordinates of the docking grid.
+        generations (int): Number of evolutionary generations to run.
+        population_size (int): Number of molecules in each generation.
+
+    Returns:
+        Tuple[float, str, Optional[str], List[Dict[str, Any]]]:
+            - Best binding score (lower is better, kcal/mol).
+            - Best molecule's SMILES string.
+            - Best molecule's docked PDBQT pose (string).
+            - History of evolution (list of dictionaries per generation).
     """
     current_population = [initial_smiles]
-    best_overall_score = 0
+    best_overall_score = 0.0
     best_overall_smiles = initial_smiles
     best_overall_pdbqt = None
 
@@ -81,7 +119,7 @@ def evolve_ligand(initial_smiles, receptor_pdbqt, center, generations=5, populat
     pdbqt = docking.prep_ligand(initial_smiles, "Initial")
     if pdbqt:
         score, docked_pose = docking.run_docking(pdbqt, receptor_pdbqt, center)
-        if score:
+        if score is not None:
             best_overall_score = score
             best_overall_pdbqt = docked_pose
             print(f"Initial Score: {score}")
@@ -92,7 +130,7 @@ def evolve_ligand(initial_smiles, receptor_pdbqt, center, generations=5, populat
                 "best_pose": best_overall_pdbqt
             })
         else:
-            best_overall_score = 0 # Failed
+            best_overall_score = 0.0  # Failed
 
     for gen in range(generations):
         print(f"--- Generation {gen+1} ---")
@@ -127,7 +165,7 @@ def evolve_ligand(initial_smiles, receptor_pdbqt, center, generations=5, populat
 
             # Selection: Keep top 50% for next generation
             # Ensure diversity?
-            current_population = [r[1] for r in results[:max(1, population_size//2)]]
+            current_population = [r[1] for r in results[:max(1, population_size // 2)]]
 
             history.append({
                 "generation": gen + 1,
@@ -140,13 +178,19 @@ def evolve_ligand(initial_smiles, receptor_pdbqt, center, generations=5, populat
 
     return best_overall_score, best_overall_smiles, best_overall_pdbqt, history
 
+
 if __name__ == "__main__":
     # Test Evolution
-    with open("data/config.txt") as f:
-        c = f.read().strip().split(',')
-        center = (float(c[0]), float(c[1]), float(c[2]))
+    try:
+        with open("data/config.txt") as f:
+            c = f.read().strip().split(',')
+            center_coords = (float(c[0]), float(c[1]), float(c[2]))
 
-    smi = "c1ccccc1" # Benzene
-    score, best_smi, _, hist = evolve_ligand(smi, "data/receptor.pdbqt", center, generations=2, population_size=3)
-    print(f"Final Best Score: {score}")
-    print(f"Final Best SMILES: {best_smi}")
+        smi = "c1ccccc1"  # Benzene
+        score, best_smi, _, hist = evolve_ligand(
+            smi, "data/receptor.pdbqt", center_coords, generations=2, population_size=3
+        )
+        print(f"Final Best Score: {score}")
+        print(f"Final Best SMILES: {best_smi}")
+    except FileNotFoundError:
+        print("Config file not found. Skipping main test.")
