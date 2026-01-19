@@ -2,15 +2,25 @@ import os
 import subprocess
 import shutil
 import platform
-import requests
 import stat
+import tempfile
+import requests
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from meeko import MoleculePreparation
+from typing import Optional, Tuple
 
-def prep_ligand(smiles, name="ligand"):
+
+def prep_ligand(smiles: str, name: str = "ligand") -> Optional[str]:
     """
     Converts SMILES to a 3D PDBQT string.
+
+    Args:
+        smiles (str): The SMILES string of the ligand.
+        name (str): The name of the ligand for logging/error reporting.
+
+    Returns:
+        Optional[str]: The PDBQT string if successful, None otherwise.
     """
     try:
         mol = Chem.MolFromSmiles(smiles)
@@ -33,8 +43,8 @@ def prep_ligand(smiles, name="ligand"):
         # Optimize Geometry (MMFF)
         try:
             AllChem.MMFFOptimizeMolecule(mol)
-        except:
-            pass # Sometimes fails, skip
+        except Exception:
+            pass  # Sometimes fails, skip
 
         # Convert to PDBQT using Meeko
         preparator = MoleculePreparation()
@@ -45,9 +55,13 @@ def prep_ligand(smiles, name="ligand"):
         print(f"Error preparing ligand {name}: {e}")
         return None
 
-def download_vina():
+
+def download_vina() -> Optional[str]:
     """
     Downloads the AutoDock Vina executable for the current OS.
+
+    Returns:
+        Optional[str]: The absolute path to the downloaded executable, or None if failed.
     """
     system = platform.system()
     machine = platform.machine()
@@ -87,11 +101,15 @@ def download_vina():
         print(f"Failed to download Vina: {e}")
         return None
 
-def get_vina_path():
+
+def get_vina_path() -> Optional[str]:
     """
     Attempts to locate the AutoDock Vina executable.
     Prioritizes system PATH, then checks local directory.
     If not found, attempts to download it.
+
+    Returns:
+        Optional[str]: The path to the Vina executable.
     """
     # Check system PATH
     system_vina = shutil.which("vina")
@@ -108,12 +126,27 @@ def get_vina_path():
     # Try downloading if not found
     return download_vina()
 
-def run_docking(ligand_pdbqt, receptor_path, center, size=(20, 20, 20)):
-    """
-    Runs AutoDock Vina.
-    """
-    import tempfile
 
+def run_docking(
+    ligand_pdbqt: str,
+    receptor_path: str,
+    center: Tuple[float, float, float],
+    size: Tuple[float, float, float] = (20, 20, 20)
+) -> Tuple[Optional[float], Optional[str]]:
+    """
+    Runs AutoDock Vina to dock the ligand against the receptor.
+
+    Args:
+        ligand_pdbqt (str): The ligand structure in PDBQT format.
+        receptor_path (str): The path to the receptor PDBQT file.
+        center (Tuple[float, float, float]): The center of the docking grid (x, y, z).
+        size (Tuple[float, float, float]): The size of the docking grid (x, y, z).
+
+    Returns:
+        Tuple[Optional[float], Optional[str]]: A tuple containing the best binding affinity (score)
+                                              and the docked PDBQT string.
+                                              Returns (None, None) on failure.
+    """
     # Determine path to vina binary
     vina_path = get_vina_path()
 
@@ -176,12 +209,11 @@ def run_docking(ligand_pdbqt, receptor_path, center, size=(20, 20, 20)):
     except subprocess.CalledProcessError as e:
         print(f"Vina failed: {e}")
         # Clean up
-        if os.path.exists(tmp_lig_path): os.remove(tmp_lig_path)
+        if os.path.exists(tmp_lig_path):
+            os.remove(tmp_lig_path)
         return None, None
     except Exception as e:
         print(f"Docking error: {e}")
-        if os.path.exists(tmp_lig_path): os.remove(tmp_lig_path)
+        if os.path.exists(tmp_lig_path):
+            os.remove(tmp_lig_path)
         return None, None
-
-if __name__ == "__main__":
-    pass

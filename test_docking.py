@@ -1,11 +1,19 @@
 import docking
-import os
+
 
 def test():
+    """
+    Test script to verify the functionality of the docking module.
+    It prepares a simple ligand (Benzene) and attempts to dock it.
+    """
     # Load config
-    with open("data/config.txt") as f:
-        c = f.read().strip().split(',')
-        center = (float(c[0]), float(c[1]), float(c[2]))
+    try:
+        with open("data/config.txt") as f:
+            c = f.read().strip().split(',')
+            center = (float(c[0]), float(c[1]), float(c[2]))
+    except FileNotFoundError:
+        print("Error: data/config.txt not found. Cannot run test.")
+        return
 
     print(f"Testing docking with center: {center}")
 
@@ -19,12 +27,13 @@ def test():
         print("Ligand prepared. Running Vina...")
         score, docked_pose = docking.run_docking(pdbqt, "data/receptor.pdbqt", center)
         print(f"Docking Score: {score}")
-        if score < 0:
+        if score is not None and score < 0:
             print("SUCCESS: Docking ran and produced a negative binding energy.")
         else:
-            print("FAILURE: Docking score suspicious (>=0).")
+            print("FAILURE: Docking score suspicious (>=0 or None).")
     else:
         print("Ligand preparation failed.")
+
 
 if __name__ == "__main__":
     test()

@@ -7,18 +7,28 @@ import plotly.express as px
 import docking
 import evolution
 import scoring
-import time
+from typing import Tuple
+
 
 st.set_page_config(page_title="Tau Protein Docking Sim", layout="wide")
 
+
 # Load Config
 @st.cache_resource
-def load_config():
+def load_config() -> Tuple[float, float, float]:
+    """
+    Loads the docking grid center configuration from a file.
+
+    Returns:
+        Tuple[float, float, float]: The (x, y, z) coordinates of the grid center.
+                                    Returns (0.0, 0.0, 0.0) if file not found.
+    """
     if not os.path.exists("data/config.txt"):
         return (0.0, 0.0, 0.0)
     with open("data/config.txt") as f:
         c = f.read().strip().split(',')
         return (float(c[0]), float(c[1]), float(c[2]))
+
 
 CENTER = load_config()
 RECEPTOR_PATH = "data/receptor.pdbqt"
@@ -32,10 +42,18 @@ Additionally, we employ an **Evolutionary Algorithm** to virtually evolve and op
 
 tabs = st.tabs(["Dashboard & Molecules", "Docking Simulation", "Visualization", "AI Optimization"])
 
+
 # Load Data
 @st.cache_data
-def load_data():
+def load_data() -> pd.DataFrame:
+    """
+    Loads molecule data from a CSV file.
+
+    Returns:
+        pd.DataFrame: A DataFrame containing molecule information.
+    """
     return pd.read_csv("data/molecules.csv")
+
 
 df = load_data()
 
@@ -258,9 +276,9 @@ with tabs[3]:
         chart_placeholder = st.empty()
 
         with st.spinner("Evolving..."):
-             best_score, best_smi, best_pose, history = evolution.evolve_ligand(
-                 initial_smiles, RECEPTOR_PATH, CENTER, generations=generations, population_size=4
-             )
+            best_score, best_smi, best_pose, history = evolution.evolve_ligand(
+                initial_smiles, RECEPTOR_PATH, CENTER, generations=generations, population_size=4
+            )
 
         st.success("Evolution Complete!")
 
@@ -277,10 +295,10 @@ with tabs[3]:
         with col2:
             st.metric("Optimized Score", f"{best_score} kcal/mol")
         with col3:
-             st.metric("Improvement", f"{improvement_pct:.2f}%")
+            st.metric("Improvement", f"{improvement_pct:.2f}%")
         with col4:
-             kd_val = scoring.calculate_kd(best_score)
-             st.metric("Optimized Kd", f"{kd_val:.4f} uM")
+            kd_val = scoring.calculate_kd(best_score)
+            st.metric("Optimized Kd", f"{kd_val:.4f} uM")
 
         st.subheader("Optimization Trajectory")
         hist_df = pd.DataFrame(history)

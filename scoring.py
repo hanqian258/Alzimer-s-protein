@@ -1,6 +1,7 @@
 import math
 
-def calculate_kd(delta_g, temperature=298.15):
+
+def calculate_kd(delta_g: float, temperature: float = 298.15) -> float:
     """
     Calculates the dissociation constant (Kd) from Gibbs free energy (delta_g).
 
@@ -20,7 +21,8 @@ def calculate_kd(delta_g, temperature=298.15):
     except OverflowError:
         return float('inf')
 
-def interpret_affinity(delta_g):
+
+def interpret_affinity(delta_g: float) -> str:
     """
     Provides a qualitative interpretation of the binding affinity.
 
@@ -39,7 +41,8 @@ def interpret_affinity(delta_g):
     else:
         return "Weak"
 
-def get_score_color(delta_g):
+
+def get_score_color(delta_g: float) -> str:
     """
     Returns a hex color code based on the binding affinity.
 
@@ -50,10 +53,10 @@ def get_score_color(delta_g):
         str: Hex color string.
     """
     if delta_g <= -9.0:
-        return "#006400" # DarkGreen
+        return "#006400"  # DarkGreen
     elif delta_g <= -7.0:
-        return "#228B22" # ForestGreen
+        return "#228B22"  # ForestGreen
     elif delta_g <= -5.5:
-        return "#DAA520" # GoldenRod
+        return "#DAA520"  # GoldenRod
     else:
-        return "#B22222" # FireBrick
+        return "#B22222"  # FireBrick
